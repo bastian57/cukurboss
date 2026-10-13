@@ -38,8 +38,11 @@ fun LicenseScreen(onActivated: () -> Unit) {
         Modifier
             .fillMaxSize()
             .padding(24.dp),
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        BrandLogo(size = 130.dp)
+        Spacer(Modifier.height(12.dp))
         Text("Aktivasi CukurBoss", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
         Spacer(Modifier.height(16.dp))
         Text("Device ID perangkat ini (ketuk ikon untuk salin):")

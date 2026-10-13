@@ -113,8 +113,13 @@ fun SetupScreen(onSetupDone: () -> Unit, onBack: (() -> Unit)? = null) {
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
                 .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            if (!isEdit) {
+                BrandLogo(size = 120.dp)
+                Spacer(Modifier.height(4.dp))
+            }
             AppField(name, { name = it }, "Nama usaha")
             AppField(address, { address = it }, "Alamat")
 

@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -51,12 +52,13 @@ import kotlinx.coroutines.delay
  * (agar lolos push tanpa file binary), di-decode sekali lalu di-cache.
  */
 
-/** Nama file banner (tanpa ekstensi): banner_dashboard, banner_kasir, banner_produk, banner_pelanggan */
+/** Nama file banner (tanpa ekstensi): banner_dashboard, banner_kasir, banner_produk, banner_pelanggan, logo_brand */
 object Banners {
     const val DASHBOARD = "banner_dashboard"
     const val KASIR = "banner_kasir"
     const val PRODUK = "banner_produk"
     const val PELANGGAN = "banner_pelanggan"
+    const val LOGO = "logo_brand"
 }
 
 private val bannerCache = mutableMapOf<String, androidx.compose.ui.graphics.ImageBitmap?>()
@@ -161,6 +163,24 @@ fun PremiumBanner(
                 fontWeight = FontWeight.SemiBold
             )
         }
+    }
+}
+
+/** Logo brand CukurBoss (monogram gunting emas) untuk layer onboarding. */
+@Composable
+fun BrandLogo(
+    modifier: Modifier = Modifier,
+    size: Dp = 150.dp
+) {
+    val ctx = LocalContext.current
+    val bmp = remember { loadBanner(ctx, Banners.LOGO) }
+    if (bmp != null) {
+        Image(
+            bitmap = bmp,
+            contentDescription = "Logo CukurBoss",
+            modifier = modifier.size(size),
+            contentScale = ContentScale.Fit
+        )
     }
 }
 
