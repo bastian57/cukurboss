@@ -47,7 +47,7 @@ import kotlinx.coroutines.delay
 /**
  * Kit banner + teks animasi "Black Gold" CukurBoss.
  *
- * Banner disimpan sebagai base64 di assets/banners/*.webp.b64
+ * Banner disimpan sebagai base64 di assets/banners/ (format: namafile.webp.b64)
  * (agar lolos push tanpa file binary), di-decode sekali lalu di-cache.
  */
 
