@@ -63,7 +63,14 @@ fun ProdukScreen() {
     LaunchedEffect(Unit) { reload() }
 
     Scaffold(
-        topBar = { AppTopBar("Produk & Layanan") },
+        topBar = {
+            PremiumBanner(
+                banner = Banners.PRODUK,
+                title = "PRODUK & LAYANAN",
+                subtitle = "Kelola harga & layanan",
+                height = 150.dp
+            )
+        },
         floatingActionButton = {
             FloatingActionButton(onClick = { editing = null; showDialog = true }) {
                 Icon(Icons.Filled.Add, contentDescription = "Tambah")

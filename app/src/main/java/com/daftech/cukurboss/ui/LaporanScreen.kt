@@ -1,7 +1,9 @@
 package com.daftech.cukurboss.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9,9 +11,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Assessment
 import androidx.compose.material.icons.filled.ChevronLeft
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material3.Card
@@ -32,9 +36,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.daftech.cukurboss.data.Db
 import com.daftech.cukurboss.data.dao.TopItem
 import com.daftech.cukurboss.data.entity.Sale
@@ -90,7 +98,59 @@ fun LaporanScreen(onReceipt: (Long) -> Unit) {
     LaunchedEffect(dayTs) { reload() }
 
     Column(Modifier.fillMaxSize()) {
-        AppTopBar("Laporan")
+        // Banner laporan: gradasi emas + ikon grafik (digambar, tanpa foto)
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .height(150.dp)
+                .background(
+                    Brush.linearGradient(
+                        listOf(Color(0xFF2A1F00), Color(0xFF000000)),
+                        start = Offset(0f, 0f),
+                        end = Offset(800f, 400f)
+                    )
+                )
+        ) {
+            Icon(
+                Icons.Filled.Assessment,
+                contentDescription = null,
+                tint = Color(0x22FFB300),
+                modifier = Modifier
+                    .size(150.dp)
+                    .align(Alignment.CenterEnd)
+                    .padding(end = 8.dp)
+            )
+            Column(
+                Modifier
+                    .align(Alignment.BottomStart)
+                    .padding(16.dp)
+            ) {
+                Text(
+                    "LAPORAN",
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.Black,
+                    color = Color.White,
+                    letterSpacing = 1.sp
+                )
+                Text(
+                    "Omzet & performa usaha",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = Color(0xFFFFB300),
+                    fontWeight = FontWeight.SemiBold
+                )
+            }
+            Box(
+                Modifier
+                    .align(Alignment.BottomCenter)
+                    .fillMaxWidth()
+                    .height(3.dp)
+                    .background(
+                        Brush.horizontalGradient(
+                            listOf(Color.Transparent, Color(0xFFFFB300), Color.Transparent)
+                        )
+                    )
+            )
+        }
         Row(
             Modifier
                 .fillMaxWidth()

@@ -76,7 +76,7 @@ private fun appVersion(ctx: Context): String {
 }
 
 @Composable
-fun PengaturanScreen(onEditBusiness: () -> Unit, onLoggedOut: () -> Unit) {
+fun PengaturanScreen(onEditBusiness: () -> Unit, onLoggedOut: () -> Unit, onBack: () -> Unit) {
     val ctx = LocalContext.current
     val scope = rememberCoroutineScope()
     var business by remember { mutableStateOf<BusinessProfile?>(null) }
@@ -167,7 +167,7 @@ fun PengaturanScreen(onEditBusiness: () -> Unit, onLoggedOut: () -> Unit) {
     }
 
     Column(Modifier.fillMaxSize()) {
-        AppTopBar("Pengaturan")
+        AppTopBar("Pengaturan", onBack = onBack)
         Column(
             Modifier
                 .fillMaxSize()

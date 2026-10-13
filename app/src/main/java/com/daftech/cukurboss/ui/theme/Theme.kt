@@ -5,28 +5,35 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-/** Palet barbershop: charcoal gelap + aksen amber/gold. */
-private val Charcoal = Color(0xFF141210)
-private val CharcoalSurface = Color(0xFF1E1B16)
-private val CharcoalVariant = Color(0xFF2A251D)
-private val Amber = Color(0xFFFFB300)
-private val Gold = Color(0xFFD4A017)
-private val CreamText = Color(0xFFF5EFE3)
+/** CukurBoss "Black Gold": hitam pekat + emas + putih. */
+val BlackGold = Color(0xFFFFB300)
+val BlackGoldDeep = Color(0xFFD4A017)
+val BlackGoldSoft = Color(0xFFFFD54F)
+val PureBlack = Color(0xFF000000)
+val BlackSurface = Color(0xFF101010)
+val BlackCard = Color(0xFF181818)
+val BlackLine = Color(0xFF2A2A2A)
+val PureWhite = Color(0xFFFFFFFF)
+val MutedWhite = Color(0xFFB3B3B3)
 
 private val DarkColors = darkColorScheme(
-    primary = Amber,
-    onPrimary = Color.Black,
-    secondary = Gold,
-    onSecondary = Color.Black,
-    tertiary = Color(0xFFE08E00),
-    background = Charcoal,
-    onBackground = CreamText,
-    surface = CharcoalSurface,
-    onSurface = CreamText,
-    surfaceVariant = CharcoalVariant,
-    onSurfaceVariant = CreamText,
+    primary = BlackGold,
+    onPrimary = PureBlack,
+    primaryContainer = Color(0xFF3A2A00),
+    onPrimaryContainer = BlackGoldSoft,
+    secondary = BlackGoldDeep,
+    onSecondary = PureBlack,
+    tertiary = BlackGoldSoft,
+    background = PureBlack,
+    onBackground = PureWhite,
+    surface = BlackSurface,
+    onSurface = PureWhite,
+    surfaceVariant = BlackCard,
+    onSurfaceVariant = MutedWhite,
+    surfaceContainerHighest = BlackLine,
     error = Color(0xFFFF6B6B),
-    onError = Color.Black
+    onError = PureBlack,
+    outline = BlackLine
 )
 
 @Composable

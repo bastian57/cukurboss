@@ -84,7 +84,12 @@ fun KasirScreen(onReceipt: (Long) -> Unit) {
     val total = cartItems.sumOf { (p, q) -> p.price * q }
 
     Column(Modifier.fillMaxSize()) {
-        AppTopBar("Kasir")
+        PremiumBanner(
+            banner = Banners.KASIR,
+            title = "KASIR",
+            subtitle = "Transaksi cepat & tepat",
+            height = 150.dp
+        )
         OutlinedTextField(
             value = query,
             onValueChange = { query = it },

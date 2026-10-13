@@ -69,7 +69,14 @@ fun PelangganScreen() {
     LaunchedEffect(Unit) { reload() }
 
     Scaffold(
-        topBar = { AppTopBar("Pelanggan") },
+        topBar = {
+            PremiumBanner(
+                banner = Banners.PELANGGAN,
+                title = "PELANGGAN",
+                subtitle = "Data & broadcast promo",
+                height = 150.dp
+            )
+        },
         floatingActionButton = {
             FloatingActionButton(onClick = { editing = null; showDialog = true }) {
                 Icon(Icons.Filled.Add, contentDescription = "Tambah")
