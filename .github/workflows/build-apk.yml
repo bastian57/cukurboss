@@ -1,0 +1,67 @@
+name: Build APK
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup JDK 17 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Setup Android SDK
+        run: |
+          SDK=/usr/local/lib/android/sdk
+          echo "sdk.dir=$SDK" > local.properties
+          CT=$(ls -d $SDK/cmdline-tools/* 2>/dev/null | head -1)
+          export PATH=$CT/bin:$PATH
+          yes | sdkmanager --licenses > /dev/null 2>&1 || true
+          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0" > /dev/null 2>&1 || true
+
+      - name: Setup Gradle 8.10.2
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.10.2
+
+      - name: Decode keystore dari secrets
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+        run: |
+          test -n "$KEYSTORE_BASE64" || (echo "KEYSTORE_BASE64 kosong" && exit 1)
+          echo "$KEYSTORE_BASE64" | base64 -d > release.keystore
+          ls -la release.keystore
+
+      - name: Build release APK
+        env:
+          KEYSTORE_FILE: release.keystore
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: gradle :app:assembleRelease --no-daemon
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cukurboss-release-apk
+          path: app/build/outputs/apk/release/*.apk
+          if-no-files-found: error
+
+      - name: Rolling release "latest"
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: "CukurBoss — latest"
+          body: "Build otomatis CukurBoss (rolling release). Update tanpa uninstall."
+          files: app/build/outputs/apk/release/*.apk
