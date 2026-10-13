@@ -1,0 +1,19 @@
+# Gradle
+.gradle/
+build/
+**/build/
+
+# Keystore & secrets — JANGAN PERNAH di-commit
+*.jks
+*.p12
+*.keystore
+release.keystore
+local.properties
+
+# Android Studio
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
